@@ -3,14 +3,14 @@ const { dirNameQuestion, rootCodeQuestion, rootAreaNameQuestion } = require('./q
 module.exports = async () => {
     const answer = await inquirer
         .prompt([
-            dirNameQuestion(),
-            rootCodeQuestion(),
+            // dirNameQuestion(),
+            // rootCodeQuestion(),
             rootAreaNameQuestion(), 
         ])
     
     return {
-        dirname: answer.dirName.trim(),
-        rootCode: answer.rootCode.trim(),
+        // dirname: answer.dirName.trim(),
+        // rootCode: answer.rootCode.trim(),
         rootAreaName: answer.rootAreaName.trim(),
     }
 } 

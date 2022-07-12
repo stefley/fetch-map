@@ -1,19 +1,25 @@
 {
-  "name": "mapData",
+  "name": "fetch-map",
   "version": "1.0.0",
-  "description": "",
+  "description": "fetch chinese map data from http://datav.aliyun.com/portal/school/atlas/area_selector",
+  "bin": {
+    "fetch-map": "./bin/www"
+  },
   "main": "index.js",
   "scripts": {
     "dev": "node index",
     "server": "node index",
-    "run": "node index"
+    "run": "node index",
+    "start": "node index"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ansi-colors": "^4.1.3",
     "axios": "^0.24.0",
-    "chalk": "^5.0.0",
+    "clear": "^0.1.0",
+    "figlet": "^1.5.2",
     "inquirer": "^8.2.0"
   }
 }

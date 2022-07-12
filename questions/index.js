@@ -16,5 +16,12 @@ exports.rootAreaNameQuestion = () => ({
     type: 'input',
     name: 'rootAreaName',
     defalut: '中国',
-    message: '输入需要获取地图数据的行政名称（如陕西省）'
+    message: '输入需要获取地图数据的行政名称（如中国）'
+})
+
+exports.isYourArea = (name) => ({
+    type: 'input',
+    name: 'isYourArea',
+    default: 'y',
+    message: `${name}是否为你需要获取数据的地区名称吗(y/n)`
 })
