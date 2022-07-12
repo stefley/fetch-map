@@ -3,7 +3,7 @@ set -e
 
 # 修改npm源地址
 npm config get registry
-npm config set registry=http://registry.npmjs.org
+npm config set registry=https://registry.npmjs.org
 
 # 登陆输入自己的npm账号和密码，还有邮箱
 echo '登录'
