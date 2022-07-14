@@ -15,7 +15,7 @@ exports.rootCodeQuestion = () => ({
 exports.rootAreaNameQuestion = () => ({
     type: 'input',
     name: 'rootAreaName',
-    defalut: '中国',
+    default: '中国',
     message: '输入需要获取地图数据的行政名称（如中国）'
 })
 

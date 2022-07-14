@@ -38,7 +38,7 @@ const fetchFn = async (code, dirPath, hasChildren = true) => {
     const { data } = await axios.get(url);
     fs.writeFile(`${dirPath}/${code}.json`, JSON.stringify(data), (err) => {
       if (err) {
-        if (failFetchCount > 3) {
+        if (failFetchCount === 3) {
           console.log(`${code}.json 文件写入失败: ${err}`);
           log(
             `${rootPath}/error.log`,
@@ -66,8 +66,8 @@ const fetchFn = async (code, dirPath, hasChildren = true) => {
         fetchFn(_code, dirPath, _hasChildren);
       });
     }
-  } catch (error) {
-    if (failFetchCount > 3) {
+  } catch (err) {
+    if (failFetchCount === 3) {
       console.log(`${code}.json 文件写入失败: ${err}`);
       log(
         `${rootPath}/error.log`,
@@ -106,14 +106,23 @@ const run = async () => {
   await fetchFn(code, dirPath);
 
   // 失败重新拉取
-  if (failFetchCodes.length > 0 && failFetchCount < 4) {
+  failFileRefetch()
+};
+
+function failFileRefetch() {
+  while(failFetchCodes.length > 0 && failFetchCount < 3) {
     failFetchCount++;
-    console.log(`开始对获取失败数据进行第${failFetchCount}次重新拉取`);
+    console.log(c.red(`开始对获取失败数据进行第${failFetchCount}次重新拉取`));
     failFetchCodes.forEach((item) => {
       fetchFn(item.code, item.dirPath, item.hasChildren);
     });
   }
-};
+  if (failFetchCodes.length > 0) {
+    console.log(c.red(`已尝试${failFetchCount}次重新拉取，请在网络环境良好的情况下重新运行`));
+  } else {
+    console.log(c.green("已完成重新拉取"))
+  }
+}
 const generateJsonMap = (code, name) => {
   imports += `\n import ${name} from './${config.dirname}/${code}.json'`;
   codemapjson[code] = name;
