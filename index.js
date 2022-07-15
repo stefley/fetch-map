@@ -81,8 +81,9 @@ const fetchFn = async (code, dirPath, hasChildren = true) => {
 
 const run = async () => {
   clear();
+  const logoC = generateLogoColor();
   console.log(
-    c.blue(figlet.textSync("FetchMap", { horizontalLayout: "full" }))
+    c[logoC](figlet.textSync("FetchMap", { horizontalLayout: "full" }))
   );
   // 生成文件根目录
   let rootPath = process.cwd() + "/fetchMap";
@@ -108,6 +109,11 @@ const run = async () => {
   // 失败重新拉取
   failFileRefetch()
 };
+
+function generateLogoColor() {
+  const colors = ["green", "yellow", "blue", "magenta", "cyan", "white"];
+  return colors[Math.floor(Math.random() * colors.length)]
+}
 
 function failFileRefetch() {
   while(failFetchCodes.length > 0 && failFetchCount < 3) {
