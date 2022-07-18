@@ -1,6 +1,6 @@
 {
   "name": "fetch-map-cn",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "fetch chinese map data from http://datav.aliyun.com/portal/school/atlas/area_selector",
   "bin": {
     "fetch-map": "./bin/www"
