@@ -85,6 +85,9 @@ const run = async () => {
   console.log(
     c[logoC](figlet.textSync("FetchMap", { horizontalLayout: "full" }))
   );
+  config = await createConfig();
+  // 获取地区编码
+  const code = await findAreaCode(config.rootAreaName);
   // 生成文件根目录
   let rootPath = process.cwd() + "/fetchMap";
   try {
@@ -93,9 +96,6 @@ const run = async () => {
     // 不存在则创建
     fs.mkdirSync(rootPath);
   }
-  config = await createConfig();
-  // 获取地区编码
-  const code = await findAreaCode(config.rootAreaName);
   const dirPath = path.resolve(rootPath, "mapjson");
   // // 创建之前先检测目录是否已经存在
   try {
