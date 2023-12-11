@@ -116,17 +116,20 @@ function generateLogoColor() {
 }
 
 function failFileRefetch() {
+  if (failFetchCodes.length > 0 && failFetchCount < 3) {
+    console.log(c.red(`数据获取失败，即将尝试重新拉取`));
+  }
   while(failFetchCodes.length > 0 && failFetchCount < 3) {
     failFetchCount++;
     console.log(c.red(`开始对获取失败数据进行第${failFetchCount}次重新拉取`));
     failFetchCodes.forEach((item) => {
-      fetchFn(item.code, item.dirPath, item.hasChildren);
+      console.log(item.code, item.dirPath, item.hasChildren)
+      if (failFetchCount === 2) {
+        fetchFn(item.code, item.dirPath, false);
+      } else {
+        fetchFn(item.code, item.dirPath, item.hasChildren);
+      }
     });
-  }
-  if (failFetchCodes.length > 0) {
-    console.log(c.red(`已尝试${failFetchCount}次重新拉取，请在网络环境良好的情况下重新运行`));
-  } else {
-    console.log(c.green("已完成重新拉取"))
   }
 }
 const generateJsonMap = (code, name) => {
